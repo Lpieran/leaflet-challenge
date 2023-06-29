@@ -76,8 +76,10 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojso
 
       for (var i = 0; i < depths.length; i++) {
         div.innerHTML +=
-          '<i style="background:' + getMarkerColor(depths[i] + 1) + '"></i> ' +
-          depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
+          '<div class="legend-item">' +
+          '<span class="legend-color" style="background-color:' + getMarkerColor(depths[i] + 1) + '"></span>' +
+          depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+') +
+          '</div>';
       }
 
       return div;
@@ -85,3 +87,4 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojso
 
     legend.addTo(map);
   });
+

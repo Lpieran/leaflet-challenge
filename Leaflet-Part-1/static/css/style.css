@@ -9,3 +9,53 @@ html {
   height: 100%;
 }
 
+.legend {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.legend-item {
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border: 1px solid black;
+}
+
+.legend-color.depth-1 {
+  background-color: #00ff00; /* Green for depth -10 to 10 km */
+}
+
+.legend-color.depth-2 {
+  background-color: #33cc33; /* Light green for depth 10 to 30 km */
+}
+
+.legend-color.depth-3 {
+  background-color: #ffff00; /* Yellow for depth 30 to 50 km */
+}
+
+.legend-color.depth-4 {
+  background-color: #ffcc00; /* Orange for depth 50 to 70 km */
+}
+
+.legend-color.depth-5 {
+  background-color: #ff9933; /* Light orange for depth 70 to 90 km */
+}
+
+.legend-color.depth-6 {
+  background-color: #ff6600; /* Dark orange for depth 90+ km */
+}
+
+.legend-color.depth-7 {
+  background-color: #ff0000; /* Red for depth 90+ km */
+}
+
+
+
+
