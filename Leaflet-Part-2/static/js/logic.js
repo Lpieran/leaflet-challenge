@@ -85,12 +85,36 @@ fetch('https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB
     // Add the tectonic plates layer to the plates layer group
     platesLayer.addTo(platesLayerGroup);
 
-    // Create a legend for earthquake depth
+    // Create layer control for base maps and overlays
+    var baseMaps = {
+      'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+      }),
+      'Topographic Map': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri',
+        style: 'map',
+        maxZoom: 17
+      })
+    };
+
+    var overlayMaps = {
+      'Earthquakes': earthquakesLayer,
+      'Tectonic Plates': platesLayerGroup
+    };
+
+    // Create layer control with filters open all the time
+    var layerControl = L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false // Prevent the layer control from collapsing
+    }).addTo(map);
+
+    // Add the "expanded" class to the layer control container element
+    layerControl.getContainer().classList.add('expanded');
+
+    // Create a legend
     var legend = L.control({ position: 'bottomright' });
-    legend.onAdd = function(map) {
+    legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'legend');
       var depths = [-10, 10, 30, 50, 70, 90];
-      var labels = [];
 
       div.innerHTML += '<h4>Depth</h4>';
 
@@ -105,27 +129,5 @@ fetch('https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB
       return div;
     };
 
-    // Add the legend to the map
     legend.addTo(map);
   });
-
-// Create layer control for base maps and overlays
-var baseMaps = {
-  'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-  }),
-  'Topographic Map': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri',
-    style: 'map',
-    maxZoom: 17
-  })
-};
-
-var overlayMaps = {
-  'Earthquakes': earthquakesLayer,
-  'Tectonic Plates': platesLayerGroup
-};
-
-// Add layer control to the map
-L.control.layers(baseMaps, overlayMaps).addTo(map);
-

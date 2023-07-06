@@ -70,8 +70,7 @@ fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojso
     legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'legend');
       var depths = [-10, 10, 30, 50, 70, 90];
-      var labels = [];
-
+    
       div.innerHTML += '<h4>Depth</h4>';
 
       for (var i = 0; i < depths.length; i++) {
